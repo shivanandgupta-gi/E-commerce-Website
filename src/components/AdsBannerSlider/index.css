@@ -1,0 +1,10 @@
+.smButton .swiper-button-prev ,.smButton .swiper-button-next{
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    top: 55% !important;
+}
+.smButton .swiper-button-prev::after ,.smButton .swiper-button-next::after{
+    font-size: 18px !important;
+    columns: #000;
+}
