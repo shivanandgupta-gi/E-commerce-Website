@@ -11,7 +11,7 @@ const HomeSlider = () => {
     // for slider used
     <div className='homdeSlider py-5'>
         <div className='px-10'>
-    <Swiper spaceBetween={20} navigation={true} modules={[Navigation,Autoplay]} autoplay={{delay:2500,disableOnInteraction:false,}} className="sliderHome">
+    <Swiper loop={true} spaceBetween={20} navigation={true} modules={[Navigation,Autoplay]} autoplay={{delay:2500,disableOnInteraction:false,}}  className="sliderHome">
     <SwiperSlide>
         <div className='item rounded-[30px] overflow-hidden'>
             <img src='https://serviceapi.spicezgold.com/download/1751685183248_NewProject(6).jpg'

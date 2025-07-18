@@ -93,3 +93,6 @@ footer form input ::placeholder{font-size:14px ;}
   font-size: 13px !important;
   color: rgba(0, 0, 0, 0.8);
 }
+
+/* for sliderv2 left 50% and right two elemen */
+.swiper-pagination-bullet-active{background: #ff5252 !important;}
