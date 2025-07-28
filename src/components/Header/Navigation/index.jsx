@@ -23,7 +23,7 @@ const Navigation = () => {
         <div className='col_1 w-[20%] mr-auto '>
           <Button className='!text-black gap-2 w-full font-semibold' onClick={openCategoryPanel}>
             <RiMenu2Fill className='text-[18px] '/>Shop By Categories
-            <FaAngleDown className='text-[13px] ml-auto font-bold'/>
+            <FaAngleDown className='text-[13px] ml-auto font-bold '/>
           </Button>
         </div>
 
@@ -40,7 +40,7 @@ const Navigation = () => {
             </li>
             <li className=" list-none relative group ">
             <Link
-                to="/" className="link transition text-[14px] font-[500] hover:text-[#ff5252] !py-4"
+                to="/" className="link transition text-[14px] font-[500] hover:text-[#ff5252] !py-4 "
             >
                 Fashion
             </Link>

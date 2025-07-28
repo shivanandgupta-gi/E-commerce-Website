@@ -3,20 +3,18 @@ import { useState } from 'react';
 import HomeSlider from '../../components/HomeSlider';
 import CatSlider from '../../components/CatSlider';
 import HomeCatgiorySlider from '../../components/CatSlider';
-import Tailer from '../../components/Tailer';
 import { TbTruckDelivery } from "react-icons/tb";
 import AdsBannerSlider from '../../components/AdsBannerSlider';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import ProductsSlider from '../../components/ProductSlider';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Autoplay, Navigation } from 'swiper/modules';
 import BlogItem from '../../components/BlogItem';
-import Footer from '../../components/Footer';
 import HomeSliderV2 from '../../components/HomeSliderV2';
+import BannerBoxV2 from '../../components/bannerBoxV2';
 
 const Home=()=> {
   const [value, setValue] = useState(0);
@@ -32,11 +30,16 @@ const Home=()=> {
 
     {/* this is for the silder one 50% and two right in 50% and 50% from top and bottom */}
     <section className='py-6 '>
-      <div className="container flex items-center">
-        <div className="part1 w-[75%]">
+      <div className="px-8 flex  gap-5">
+        <div className="part1 w-[70%]">
           <HomeSliderV2/>
         </div>
+        <div className='part2 w-[30%] gap-5 flex items-center justify-between flex-col '>
+          <BannerBoxV2 info="left" image={"https://serviceapi.spicezgold.com/download/1741664496923_1737020250515_New_Project_47.jpg"}/>
+          <BannerBoxV2 info="right" image={"https://serviceapi.spicezgold.com/download/1741664665391_1741497254110_New_Project_50.jpg"}/>
+        </div>
       </div>
+      
     </section>
 
     {/* below home slider category slider */}
@@ -159,18 +162,8 @@ const Home=()=> {
 </section>
 
       {/* this is for footer like shiping secure payment etc */}
-      <Footer/>
 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
-    <br/> 
+
     </>
   ) 
 }

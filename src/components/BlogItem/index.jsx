@@ -8,7 +8,7 @@ const BlogItem=() =>{
     <div className='blogItems px-5  group'>
     <div className="imgWrapper w-full overflow-hidden rounded-md cursor-pointer relative">
     <img
-        src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/psblog/b/8/1105_813/b-blog-6.jpg"
+        src="https://serviceapi.spicezgold.com/download/1750304462017_1000005912.jpg"
         className="w-full transition-all group-hover:scale-105 group-hover:rotate-1"
         alt="blog image"
     />

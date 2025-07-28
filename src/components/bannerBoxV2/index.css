@@ -1,0 +1,9 @@
+.bannerBoxV2{
+    height: 210px;
+}
+.links {
+    text-decoration: underline;
+}
+.links:hover {
+    color: #ff5252;
+}
