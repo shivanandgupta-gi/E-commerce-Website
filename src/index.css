@@ -35,7 +35,9 @@ body{
 }
 
 
-
+.link:hover {
+  color: #ff5252; /* Change to your desired hover color */
+}
 
 .MuiBadge-badge{background-color:#ff5252 !important ;}
 
@@ -65,7 +67,7 @@ footer form input ::placeholder{font-size:14px ;}
     color: #000;
 
 }
-
+p{font-size: 14px ; line-height:25px ; margin-bottom: 10px;}
 /* for scrollbar */
 ::-webkit-scrollbar{
   width: 10px !important; 
@@ -116,4 +118,16 @@ this is for the product list */
 .Mui-selected.MuiPaginationItem-page {
   background: #ff5252 !important;
   color: #fff !important;
+}
+.productContent .actions button {
+  min-width: 40px !important;
+  height: 30px !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }

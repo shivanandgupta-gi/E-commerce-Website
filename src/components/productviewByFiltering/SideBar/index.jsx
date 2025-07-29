@@ -17,9 +17,9 @@ import 'react-range-slider-input/dist/style.css';
 
 const SideBar=() =>{
   const [open, setOpen] = useState(true);
-  const [openAvailable, setOpenAvailable] = useState(false);
-  const [opensize,setopensize]=useState(false);
-  const [openRating,setOpenRating]=useState(false);
+  const [openAvailable, setOpenAvailable] = useState(true);
+  const [opensize,setopensize]=useState(true);
+  const [openRating,setOpenRating]=useState(true);
 
   return (
     <aside className='sidebar py-5'>
