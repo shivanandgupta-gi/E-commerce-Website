@@ -161,7 +161,7 @@ const Home=()=> {
   </div>
 </section>
 
-      {/* this is for footer like shiping secure payment etc */}
+      
 
 
     </>

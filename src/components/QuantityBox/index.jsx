@@ -2,8 +2,6 @@ import Button from '@mui/material/Button';
 import React, { useState } from 'react'
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
-import { CiHeart } from "react-icons/ci";
-import { IoIosGitCompare } from "react-icons/io";
 // this is for the qunatity adding on the product 
 
 export default function QuantatyBox() {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { GiReturnArrow } from "react-icons/gi";
 import { BsWallet2 } from "react-icons/bs";
@@ -14,9 +14,16 @@ import { IoLogoYoutube } from "react-icons/io";
 import { FaInstagram } from "react-icons/fa";
 import { FaPinterest } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
+import Drawer from '@mui/material/Drawer';
+import { MyContext } from '../../App';
+import CartPanelDrawer from '../CartPanelDrawer';
+import { MdClose } from "react-icons/md";
 
 //this is for the shipping icon and payment and delivery icon in footer section
 const Footer = () => {
+ const [openCartPanel, setOpenCartPanel] =useState(false);
+    const context = useContext(MyContext);
+
   return (
     <>
     <footer className="py-6 bg-[#f9f7f7]">
@@ -210,7 +217,22 @@ const Footer = () => {
             </div>
         </div>
 
-
+        {/* this is for the product view on the screen or open new page */}
+         
+      <Drawer
+                open={context.openCartPanel}
+                onClose={()=>{context.toggleCartPanel(false)}}
+                anchor="right"
+                className='!w-[500px] cartPanel'
+              >
+                <div className="flex items-center justify-between py-3 px-4 gap-3 border-b border-[rgba(0,0,0,0.1)] overflow-hidden">
+                  <h4 className='!font-bold '>Shopping Cart (1)</h4>
+                  <MdClose className="text-[20px] cursor-pointer" onClick={context.toggleCartPanel(false)}/>
+                </div>
+      
+                {/* adding item in drawer */}
+                <CartPanelDrawer/>
+              </Drawer>
     </>
   );
 };
