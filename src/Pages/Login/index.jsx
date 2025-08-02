@@ -51,7 +51,7 @@ export default function Login() {
             </div>
 
             {/* for forget password */}
-            <a className="link cursor-pointer text-[14px] font-[600]">Forgot Password?</a>
+            <a className="link cursor-pointer text-[14px] font-[600]" >Forgot Password?</a>
 
               <div className="flex items-center w-full mt-3 mb-3">
                 <Button className="btn-org btn-md w-full">Login</Button>

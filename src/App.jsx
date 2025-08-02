@@ -18,6 +18,9 @@ import ProductZoom from './components/ProductZoom/index.jsx';
 import ProductDetailsOnScreen from './components/productDetailsOnScreen/index.jsx';
 import Login from './Pages/Login/index.jsx';
 import Register from './Pages/Register/index.jsx';
+import Cart from './Pages/Cart/index.jsx';
+import CheckOut from './Pages/CheckOut/index.jsx';
+import MyAccount from './components/MyAccount/index.jsx';
 
 
 
@@ -30,6 +33,7 @@ function App() {
   const [maxWidth, setMaxWidth] = React.useState('lg');
   const [fullWidth, setFullWidth] = React.useState(true);
   const [openCartPanel, setOpenCartPanel] =useState(false);
+  const [isLogin,setIsLogin]=useState(true);
 
   const handleClose = () => {
     setOpen(false);
@@ -44,13 +48,16 @@ function App() {
   setOpen,
   setOpenCartPanel,
   openCartPanel,
-  toggleCartPanel
+  toggleCartPanel,
+  isLogin,
+  setIsLogin
   }
 
 
   return (
     <>
       <BrowserRouter>
+      {/* this value passed in every component and can used by them */}
       <MyContext.Provider value={values}>
       <Header/>
       <Routes>
@@ -59,6 +66,12 @@ function App() {
         <Route path={"/product/:id"} exact={true} element={<ProductDetails/>}/>
         <Route path={"/login"} exact={true} element={<Login/>}/>
         <Route path={"/register"} exact={true} element={<Register/>}/>
+        {/* thsi is for the cart view  */}
+        <Route path={"/cart"} exact={true} element={<Cart/>}/>
+        {/* thsi is for address add and proceed to pay button on cart drawer */}
+        <Route path={"/pay"} exact={true} element={<CheckOut/>}/>
+        {/* thsi is for the my-account profile componenet open when click on the my profile icon */}
+        <Route path={"/my-account"} exact={true} element={<MyAccount/>}/>
       </Routes>
       <Footer/>
       </MyContext.Provider>

@@ -122,7 +122,7 @@ export default function CartPanelDrawer() {
             <br/>
 
             <div className="flex items-center justify-between w-full gap-5">
-                <Link to="/cart" className='w-[50%] d-block'><Button className="btn-org btn-lg w-full !h-[40px]">More  Add</Button></Link>
+                <Link to="/cart" className='w-[50%] d-block'><Button className="btn-org btn-lg w-full !h-[40px]">View Cart</Button></Link>
                 <Link to="/pay" className='w-[50%] d-block'><Button className="btn-org btn-lg w-full !h-[40px]">Pay Now</Button></Link>
             </div>
 

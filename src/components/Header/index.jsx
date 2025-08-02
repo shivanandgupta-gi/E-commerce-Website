@@ -10,6 +10,20 @@ import { FaRegHeart } from "react-icons/fa";
 import Tooltip from '@mui/material/Tooltip';
 import Navigation from './Navigation';
 import { MyContext } from '../../App';
+import { FaRegUserCircle } from "react-icons/fa";
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { FaRegUser } from "react-icons/fa";
+import { IoBagCheck } from "react-icons/io5";
+import { IoIosLogOut } from "react-icons/io";
+import { IoBagCheckOutline } from "react-icons/io5";
+
+
+
+
+
+
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -24,6 +38,15 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 let Header =()=> {
     const context=useContext(MyContext);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
   return (
     <header className='bg-white'>
         <div className='top-strip px-2 border-t-[1px] border-gray-200 border-b-[3px] '>
@@ -54,15 +77,94 @@ let Header =()=> {
                 <div className='col1 w-[25%]'>
 
                 </div>
-                <div className='col2 w-[45%]'>
+                <div className='col2 w-[40%]'>
                     <Search/>
                 </div>
-                <div className='col3 w-[30%] flex items-center pl-7'>
-                    <ul className='flex items-center justify-end gap-3  w-full'>
-                        <li className='list-none'>
+                <div className='col3 w-[35%] flex items-center pl-7'>
+                     <ul className='flex items-center justify-end gap-3  w-full'>
+                        {/* this is for login if not open login icon and if not show user account */}
+                    {
+                        context.isLogin === false ?
+                             <li className='list-none'>
+                            
                             <Link to="/login" className='link text-[15px] font-[550] text-black-800 hover:text-[#ff5252]'>Login</Link> | &nbsp;
                             <Link to="/register" className='link text-[15px] font-[550] text-black-800 hover:text-[#ff5252]'>Register</Link>
-                        </li>
+                        </li>    
+                        :(
+                            // this is for the hover over account opent a mini widow like account, order,etc
+                            <>
+                            <Button className="!text-[#000] myAccountWrap flex items-center gap-3 cursor-pointer" onClick={handleClick}>
+                                <Button className="!min-w-[40px] !w-[40px] !h-[40px] !bg-[#f1f1f1] rounded-full ">
+                                    <FaRegUserCircle className="text-[16px] text-[rgba(0,0,0,0.7)]" />
+                                </Button>
+
+                                <div className="info flex flex-col ">
+                                <h4 className="leading-3 text-[14px] text-[rgba(0,0,0,0.6)] font-[500] mb-0 capitalize text-left justify-start">
+                                    Shivanand Gupta
+                                </h4>
+                                <span className="text-[13px] text-[rgba(0,0,0,0.6)] font-[400] capitalize text-left justify-start">
+                                    shvianand@gmail.com
+                                </span>
+                                </div>
+                                </Button>
+                                 <Menu
+                                    anchorEl={anchorEl}
+                                    id="account-menu"
+                                     
+                                    open={open}
+                                    onClose={handleClose}
+                                    onClick={handleClose}
+                                    slotProps={{
+                                    paper: {
+                                        elevation: 0,
+                                        sx: {
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
+                                        '& .MuiAvatar-root': {
+                                            width: 32,
+                                            height: 32,
+                                            ml: -0.5,
+                                            mr: 1,
+                                        },
+                                        '&::before': {
+                                            content: '""',
+                                            display: 'block',
+                                            position: 'absolute',
+                                            top: 0,
+                                            right: 14,
+                                            width: 10,
+                                            height: 10,
+                                            bgcolor: 'background.paper',
+                                            transform: 'translateY(-50%) rotate(45deg)',
+                                            zIndex: 0,
+                                        },
+                                        },
+                                    },
+                                    }}
+                                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                >
+                                    <Link to="/my-account" className='w-full block'>
+                                    <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
+                                    <FaRegUser className='text-[18px]'/> <span className='font-[14px'>My account</span>
+                                    </MenuItem>
+                                    </Link>
+                                    <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
+                                    <IoBagCheckOutline className='text-[18px]'/> <span className='font-[14px'>Orders</span>
+                                    </MenuItem>
+                                    <Link to="/cart">
+                                    <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
+                                    <FaRegHeart className='text-[18px]'/> <span className='font-[14px'>My List</span>
+                                    </MenuItem>
+                                    </Link>
+                                    <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
+                                    <IoIosLogOut className='text-[18px]'/> <span className='font-[14px'>LogOut</span>
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        )
+                    }
                         <li>
                             <Tooltip title="Compare" >
                             <IconButton aria-label="cart">
@@ -91,6 +193,7 @@ let Header =()=> {
                             </Tooltip>
                         </li>
                     </ul>
+                    
                 </div>
             </div>
         </div>
