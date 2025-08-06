@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoBagCheck } from "react-icons/io5";
 import Button from '@mui/material/Button';
-import CartItem from './cartItems';
+import CartItem from './CartItems';
 
 export default function Cart() {
 
