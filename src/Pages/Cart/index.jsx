@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoBagCheck } from "react-icons/io5";
 import Button from '@mui/material/Button';
-import CartItem from './CartItems';
-
+import CartItem from './CartItem';
 export default function Cart() {
 
     
@@ -26,7 +25,7 @@ export default function Cart() {
                 </div>
                 
                 <div className="shadow-md rounded-md  bg-white">
-                    <CartItem size="Black"/>
+                    <CartItem size="black"/>
                     
                 </div>
                 </div>
