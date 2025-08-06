@@ -1,10 +1,10 @@
 import React from 'react';
 import { IoBagCheck } from "react-icons/io5";
 import Button from '@mui/material/Button';
-import MyCartItem from './cartItems';
 import AccountSideBar from '../../components/AccountSideBar';
+import MyCartItems from '../CartItemsList';
 
-export default function MyList() {
+const MyList=()=> {
   return (
     <section className="py-10 w-full min-h-screen">
   <div className="flex gap-5 px-10 ml-8 items-start">
@@ -25,12 +25,7 @@ export default function MyList() {
                 </p>
             </div>
              <div className="shadow-md rounded-md  bg-white">
-              <MyCartItem />
-              <MyCartItem />
-              <MyCartItem />
-              <MyCartItem />
-              <MyCartItem />
-              <MyCartItem />
+              <MyCartItems/>
             </div>
           </div>
         </div>
@@ -38,3 +33,5 @@ export default function MyList() {
     </section>
   );
 }
+
+export default MyList;

@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import { IoClose } from "react-icons/io5";
 
 
-const MyCartItem=(props)=> {
+const MyCartItems=(props)=> {
 
    
            
@@ -43,4 +40,4 @@ const MyCartItem=(props)=> {
   )
 };
 
-export default MyCartItem;
+export default MyCartItems;
