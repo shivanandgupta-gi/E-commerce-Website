@@ -149,11 +149,13 @@ let Header =()=> {
                                     <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
                                     <FaRegUser className='text-[18px]'/> <span className='font-[14px'>My account</span>
                                     </MenuItem>
-                                    </Link>
+                                    </Link >
+                                    <Link to="/my-order">
                                     <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
                                     <IoBagCheckOutline className='text-[18px]'/> <span className='font-[14px'>Orders</span>
                                     </MenuItem>
-                                    <Link to="/cart">
+                                    </Link>
+                                    <Link to="/my-list">
                                     <MenuItem onClick={handleClose} className='flex gap-2 !py-2'>
                                     <FaRegHeart className='text-[18px]'/> <span className='font-[14px'>My List</span>
                                     </MenuItem>

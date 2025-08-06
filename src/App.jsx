@@ -21,6 +21,8 @@ import Register from './Pages/Register/index.jsx';
 import Cart from './Pages/Cart/index.jsx';
 import CheckOut from './Pages/CheckOut/index.jsx';
 import MyAccount from './components/MyAccount/index.jsx';
+import MyList from './Pages/MyList/index.jsx';
+import Order from './Pages/Order/index.jsx';
 
 
 
@@ -72,6 +74,10 @@ function App() {
         <Route path={"/pay"} exact={true} element={<CheckOut/>}/>
         {/* thsi is for the my-account profile componenet open when click on the my profile icon */}
         <Route path={"/my-account"} exact={true} element={<MyAccount/>}/>
+        {/* this is for the my list in account section */}
+        <Route path={"/my-list"} exact={true} element={<MyList/>}/>
+        {/* order Pages */}
+        <Route path={"/my-order"} exact={true} element={<Order/>}/>
       </Routes>
       <Footer/>
       </MyContext.Provider>
