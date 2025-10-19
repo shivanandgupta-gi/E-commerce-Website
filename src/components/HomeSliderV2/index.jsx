@@ -11,7 +11,7 @@ import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import Button from '@mui/material/Button';
 
 
-const HomeSliderV2=()=> {
+const HomeSliderV2=(props)=> {
   return (
     <>
      <Swiper
@@ -20,52 +20,41 @@ const HomeSliderV2=()=> {
         effect={'fade'}
         navigation={true}
         pagination={{
-          clickable: true,
+          clickable: true, 
         }}
         autoplay={{
           delay:2500,
           disableOnInteraction:false,
         }}
         modules={[EffectFade, Navigation, Pagination,Autoplay]}
-        className="mySwiper"
+        className="mySwiper w-full h-[500px]"
       >
-        <SwiperSlide>
-            <div className='   item w-full rounded-md overflow-hidden '>
-          <img src="https://serviceapi.spicezgold.com/download/1742441193376_1737037654953_New_Project_45.jpg" />
-            <div className='info absolute top-0 -right-[100%] w-[50%] h-[100%] flex flex-col items-start justify-center 
-                  z-50 p-8 transition-all opacity-0 duration-700'>
-                <h4 className='text-[20px] font-[500] w-full mb-3 relative -right-[100%] opacity-0 duration-1000'>Big Saving Days Sale</h4>
-                <h2 className='text-[35px] font-[700] w-full '>Buy Iphone in Black Color</h2>
-                <h3 className='flex items-center gap-3 text-[20px] font-[500] w-full text-left mt-3 mb-3'>
-                    Starting At Only {" "}
-                    <span className='text-primary text-[30px] font-[700]'>Rs. 30,000</span>
-                </h3>
-                <div className='w-full'>
-                    <Button className='btn-org mt-4 ml-8'>SHOP NOW</Button>
-                </div>
-                </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-        <div className='item w-full rounded-md overflow-hidden relative'>
-            <img src="https://serviceapi.spicezgold.com/download/1742439896581_1737036773579_sample-1.jpg" />
-
-                <div className='info absolute top-0 -right-[100%] w-[50%] h-[100%] flex flex-col items-start justify-center 
-                  z-50 p-8 transition-all opacity-0 duration-700'>
-                <h4 className='text-[20px] font-[500] w-full mb-3 relative -right-[100%] opacity-0 duration-700'>Big Saving Days Sale</h4>
-                <h2 className='text-[35px] font-[700] w-full relative -right-[100%] opacity-0 duration-700'>Women Solid Rounded Green T-Shirt</h2>
-                <h3 className='flex items-center gap-3 text-[20px] font-[500] w-full text-left mt-3 mb-3
-                relative -right-[100%] opacity-0 duration-700'>
-                    Starting At Only {" "}
-                    <span className='text-primary text-[30px] font-[700]'>Rs. 1500</span>
-                </h3>
-                <div className='w-full'>
-                    <Button className='btn-org mt-4 ml-8'>SHOP NOW</Button>
-                </div>
-                </div>
-        </div>
-        </SwiperSlide>
-
+        {
+          props.data.map((item,index)=>{
+            if(item.isDisplayOnHomeBanner === true){
+              return(
+               <SwiperSlide>
+              <div className=' item w-full rounded-md overflow-hidden relative'>
+            <img  className="w-full h-full object-cover" src={item.bannerimages}/>
+              <div className='info absolute top-0 -right-[100%] w-[50%] h-full flex flex-col items-start justify-center 
+                    z-50 p-8 transition-all opacity-0 duration-700'>
+                  <h4 className='text-[20px] font-[500] w-full mb-3 relative -right-[100%] opacity-0 duration-1000'>{item.bannerTitlename}</h4>
+                  <h2 className='text-[30px] font-[700] w-full '>{item.name}</h2>
+                  <h3 className='flex items-center gap-3 text-[20px] font-[500] w-full text-left mt-3 mb-3'>
+                      Starting At Only {" "}
+                      <span className='text-primary text-[30px] font-[700]'>&#8377;{item.price}</span>
+                  </h3>
+                  <div className='w-full'>
+                      <Button className='btn-org mt-4 ml-8'>SHOP NOW</Button>
+                  </div>
+                  </div>
+            </div>
+          </SwiperSlide>
+              )
+            }
+           
+          })
+        }
       </Swiper>
       </>
   )

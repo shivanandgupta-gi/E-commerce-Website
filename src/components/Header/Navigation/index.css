@@ -1,26 +1,55 @@
-.categoryPanel button{
-    text-transform: capitalize !important ;
+/* Capitalize category panel button text */
+.categoryPanel button {
+  text-transform: capitalize !important;
 }
-.nav  li:hover .submenu{
-    visibility: hidden;
-}
-.nav  li:hover .submenu{
-    opacity: 1 !important;
-    visibility: inherit;
-    top:100%;
-}
-.nav li .submenu li:hover button{color: #ff5252 !important;}
-.nav  li .submenu li .submenu{
-    top: 0px !important;
-    left: 120% !important;
-    opacity: 0 !important;
-}
-.nav  li .submenu li:hover .submenu{
-    left: 100% !important;
-    opacity: 1 !important;
-}
-.nav  li .submenu li .submenu button{color : rgba(0, 0, 0, 0.80) !important}
 
-.nav  li .submenu li .submenu button:hover{color : #ff5252 !important}
+/* Default submenu hidden */
+.nav li .submenu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  min-width: 200px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 99999; /* ensures it stays above banner */
+  transition: all 0.3s ease; /* smooth effect */
+}
 
-.categoryPanel button{text-transform: capitalize !important;}
+/* Show submenu on hover */
+.nav li:hover .submenu {
+  opacity: 1 !important;
+  visibility: visible;
+  top: 100%;
+}
+
+/* First-level submenu buttons hover */
+.nav li .submenu li:hover button {
+  color: #ff5252 !important;
+}
+
+/* Nested (third-level) submenu hidden by default */
+.nav li .submenu li .submenu {
+  top: 0 !important;
+  left: 120% !important;
+  opacity: 0 !important;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Show nested submenu on hover */
+.nav li .submenu li:hover .submenu {
+  left: 100% !important;
+  opacity: 1 !important;
+  visibility: visible;
+}
+
+/* Submenu button colors */
+.nav li .submenu li .submenu button {
+  color: rgba(0, 0, 0, 0.80) !important;
+}
+
+.nav li .submenu li .submenu button:hover {
+  color: #ff5252 !important;
+}

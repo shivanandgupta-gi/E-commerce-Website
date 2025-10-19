@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules'
 import './index.css';
 
- const ProductZoom = () => {
+ const ProductZoom = (props) => {
       const [slideIndex, setSlideIndex] = useState(0);
       const zoomSliderBig = useRef();
       const zoomSliderSml = useRef();
@@ -21,7 +21,6 @@ import './index.css';
   return (
     <>
       <div className="flex gap-3">
-
         <div className="slider w-[15%]">
           <Swiper
             // install Swiper modules
@@ -32,44 +31,18 @@ import './index.css';
             slidesPerView={5}
             spaceBetween={0}
             centeredSlides={false} // ✅ prevents centering
-            className="zoomProductSlider h-[500px] overflow-hidden'"
+            className={`zoomProductSliderThumbs h-[500px] overflow-hidden ${props?.images?.length > 5 && "space"}`}
             >
-            <SwiperSlide> 
-              <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === 0 ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(0)}>
-                <img src="https://m.media-amazon.com/images/I/41qjFMIltsL._SX300_SY300_QL70_FMwebp_.jpg"
-                className="w-full transition-all group-hover:scale-110"></img>
-              </div>
-          </SwiperSlide>
-          <SwiperSlide> 
-              <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === 1 ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(1)}>
-                <img src="https://m.media-amazon.com/images/I/61TPStS8ItL._SX679_.jpg"
-                className="w-full transition-all group-hover:scale-110"></img>
-              </div>
-          </SwiperSlide>
-          <SwiperSlide> 
-              <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === 2 ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(2)}>
-                <img src="https://m.media-amazon.com/images/I/61CvqK4Z6xL._SX679_.jpg"
-                className="w-full transition-all group-hover:scale-110"></img>
-              </div>
-          </SwiperSlide>
-          <SwiperSlide> 
-              <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === 3 ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(3)}>
-                <img src="https://m.media-amazon.com/images/I/61VVY2RduUL._SX679_.jpg"
-                className="w-full transition-all group-hover:scale-110"></img>
-              </div>
-          </SwiperSlide>
-          <SwiperSlide> 
-              <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === 4 ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(4)}>
-                <img src="https://m.media-amazon.com/images/I/715M4FuPg8L._SX679_.jpg"
-                className="w-full transition-all group-hover:scale-110"></img>
-              </div>
-          </SwiperSlide>
-          <SwiperSlide> 
-              <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === 5 ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(5)}>
-                <img src="https://m.media-amazon.com/images/I/61aWjpVixfL._SL1200_.jpg"
-                className="w-full transition-all group-hover:scale-110"></img>
-              </div>
-          </SwiperSlide>
+              {
+                props.images.map((item,index)=>(
+                  <SwiperSlide key={index}> 
+                      <div className={`item rounded-md overflow-hidden cursor-pointer group ${slideIndex === index ? 'opacity-1' : 'opacity-30'}`} onClick={()=>goto(index)}>
+                        <img src={item}
+                        className="w-full transition-all group-hover:scale-110"></img>
+                      </div>
+                  </SwiperSlide>
+                ))
+              }
           </Swiper>
         </div>
        
@@ -81,53 +54,19 @@ import './index.css';
             slidesPerView={1}
             spaceBetween={0} // ✅ prevents centering
             >
-            <SwiperSlide>
-              <InnerImageZoom
-                  zoomType="hover"
-                  zoomScale={1}
-                  src={"https://m.media-amazon.com/images/I/514rF5FWrsL._SX679_.jpg"}
-                />
-            </SwiperSlide>
-            <SwiperSlide>
-              <InnerImageZoom
-                  zoomType="hover"
-                  zoomScale={1}
-                  src={"https://m.media-amazon.com/images/I/61TPStS8ItL._SX679_.jpg"}
-                />
-            </SwiperSlide>
-            <SwiperSlide>
-              <InnerImageZoom
-                  zoomType="hover"
-                  zoomScale={1}
-                  src={"https://m.media-amazon.com/images/I/61CvqK4Z6xL._SX679_.jpg"}
-                />
-            </SwiperSlide>
-            <SwiperSlide>
-              <InnerImageZoom
-                  zoomType="hover"
-                  zoomScale={1}
-                  src={"https://m.media-amazon.com/images/I/61VVY2RduUL._SX679_.jpg"}
-                />
-            </SwiperSlide>
-            <SwiperSlide>
-              <InnerImageZoom
-                  zoomType="hover"
-                  zoomScale={1}
-                  src={"https://m.media-amazon.com/images/I/715M4FuPg8L._SX679_.jpg"}
-                />
-            </SwiperSlide>
-            <SwiperSlide>
-              <InnerImageZoom
-                  zoomType="hover"
-                  zoomScale={1}
-                  src={"https://m.media-amazon.com/images/I/514rF5FWrsL._SX679_.jpg"}
-                />
-            </SwiperSlide>
-            
+              {              
+                 props.images.map((item,index)=>(
+                  <SwiperSlide key={index}>
+                    <InnerImageZoom
+                        zoomType="hover"
+                        zoomScale={1}
+                        src={item}
+                      />
+                  </SwiperSlide>
+                 ))
+              }
       </Swiper>
        </div>
-
-      
       </div>
     </>
   );

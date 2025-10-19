@@ -15,7 +15,7 @@ import ProductLoadingGrid from '../../components/ProductSkelatonLoading/ProductL
 import ProductItems from '../../components/ProductItems';
 
 
-const ProductListing = () => {
+const SearchHome = () => {
     const [itemView, setIsItemView] = useState('grid');
     const [sortBy, setSortBy] = useState("default");
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -156,4 +156,4 @@ const ProductListing = () => {
     )
 }
 
-export default ProductListing;
+export default SearchHome;

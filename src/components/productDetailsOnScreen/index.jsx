@@ -7,47 +7,72 @@ import Rating from '@mui/material/Rating';
 import QuantatyBox from '../QuantityBox';
 
 
-const ProductDetailsOnScreen=()=> {
+const ProductDetailsOnScreen=(props)=> {
+    console.log(props)
     const [productActionIndex, setProductActionIndex]= useState(null);
   return (
     <>
-      <h1 className="text-[22px] font-[600] mb-2">Acer Super ZX 5G (Carbon Black, 6GB RAM, 128GB Storage) | 120 Hz FHD+ Display | 5000 mAh Ultra-Thin Battery | Dimensity 6300 5G Processor | Sony 64MP AI Camera</h1>
-                <div className="flex items-center gap-3">
-                    <span className="text-gray-400 text-[13px]">Brands:</span>
-                    <span className="font-[500] text-black opacity-75">Acer </span>
-                    <Rating name="size-medium" defaultValue={4} readOnly />
-                    <span className="text-[13px] cursor-pointer">Review (5)</span>
+      <h1 className="text-[22px] font-[600] mb-2">{props.data.name}</h1>
+                <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-1">
+                        <span className="text-gray-500 text-[13px]">Brands:</span>
+                        <span className="font-[500] text-black opacity-75 text-[16px]">{props.data.brand}</span>
+                    </div>
+                    <Rating name="size-medium" defaultValue={props.data.rating} readOnly />
+                    <span className="text-[13px] cursor-pointer" onClick={props.gotoReviews}>Review ({props.reviewsCount})</span>
                 </div>
                 <div className='flex items-center gap-4 mt-4'>
-                    <span className='oldPrice line-through text-gray-500 text-[16px] font-[500]'>Rs.5000</span>
-                    <span className='oldPrice text-primary font-[600] text-[18px]'>Rs.2000</span>
-                    <span className='text-[14px]'>Available in Stock : <span className='text-green-600 text-[14px] font-bold'>150 Items</span></span>
+                    <span className='oldPrice line-through text-gray-500 text-[16px] font-[500]'>&#8377;{props.data.oldPrice}</span>
+                    <span className='oldPrice text-primary font-[600] text-[18px]'>&#8377;{props.data.price}</span>
+                    <span className='text-[14px]'>Available in Stock : <span className='text-green-600 text-[14px] font-bold'>{props.data.countInStock} Items</span></span>
                 </div>
                 {/* description adding */}
                       <h3 className='mt-5 mb-2 font-bold text-[17px]'>About This Product</h3>
-    <ul className='mb-5 text-[13px]' style={{ listStyleType: 'disc', paddingLeft: '20px' }}>
-                    <li>
-                        PERFORMANCE THAT POWERS THE FUTURE: Equipped with the MediaTek Dimensity 6300 5G chipset, the Acer Super ZX delivers effortless multitasking and blazing-fast speeds. With an AnTuTu score of 414 K+, and next-gen 5G capabilities, this device is built for high performance.
-                    </li>
-                    <li>
-                        FAST CHARGING, LONG-LASTING POWER: Stay ahead with 50% charge in just 35 minutes. The robust battery ensures all-day power, keeping you connected, entertained, and always ready to go.
-                    </li>
-                    <li>
-                        PRO-LEVEL CAMERA EXPERIENCE: Capture the world in stunning detail with the Sony 64MP AI Camera. From crisp daylight shots to low-light brilliance, AI Photo Enhancer, Night Mode, and Portrait Filters ensure every shot is Instagram-worthy.
-                    </li>
-                </ul>
-
-                {/* size adding  */}
-                    <div className="flex items-center gap-3">
-                        <span className="text-[16px]">Colour:</span>
-                        <div className="flex items-center gap-1 actions">
-                            <Button className={`${productActionIndex === 0 ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(0)}>Cosmic Green</Button>
-                            <Button className={`${productActionIndex === 1 ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(1)}>Black</Button>
-                            <Button className={`${productActionIndex === 2 ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(2)}>Red</Button>
-                            <Button className={`${productActionIndex === 3 ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(3)}>Luner Blue</Button>
+                      <p className='mt-3 pr-10 mb-5'>
+                         {props.data.description}
+                      </p>
+                {/* ram adding dynamic  */}
+                {
+                    props.data?.productRam?.length > 0 &&  
+                        <div className="flex items-center gap-3">
+                            <span className="text-[16px]">RAM:</span>
+                            <div className="flex items-center gap-1 actions">
+                                {
+                                    props.data.productRam.map((item,index)=>(
+                                        <Button className={`${productActionIndex === index ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(index)}>{item}</Button>
+                                    ))
+                                }
+                                </div>
                         </div>
-                    </div>
-
+                }
+                 {/* size adding dynamic  */}
+                {
+                    props.data?.size?.length > 0 &&  
+                        <div className="flex items-center gap-3">
+                            <span className="text-[16px]">Size:</span>
+                            <div className="flex items-center gap-1 actions">
+                                {
+                                    props.data.size.map((item,index)=>(
+                                        <Button className={`${productActionIndex === index ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(index)}>{item}</Button>
+                                    ))
+                                }
+                                </div>
+                        </div>
+                }
+                 {/* weight adding dynamic  */}
+                {
+                    props.data?.productWeight?.length > 0 &&  
+                        <div className="flex items-center gap-3">
+                            <span className="text-[16px]">Size:</span>
+                            <div className="flex items-center gap-1 actions">
+                                {
+                                    props.data.productWeight.map((item,index)=>(
+                                        <Button className={`${productActionIndex === index ? '!bg-primary !text-white' : ''}`} onClick={() => setProductActionIndex(index)}>{item}</Button>
+                                    ))
+                                }
+                                </div>
+                        </div>
+                }
                 {/* quantity adding */}
                <p className="text-[14px] text-gray-600 mt-4">
                     Free Shipping (Est. Delivery Time 2–3 Days)

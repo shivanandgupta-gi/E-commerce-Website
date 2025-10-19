@@ -9,47 +9,31 @@ import { Navigation } from 'swiper/modules'
 import ProductItems from '../ProductItems';
 
 const ProductsSlider = (props) => {
-  return (
-    <div className="productsSlider py-3">
-        <Swiper
-              // install Swiper modules
-            modules={[Navigation]}
-            navigation={true}
-            slidesPerView={props.items}
-            spaceBetween={10}
-            grabCursor={true}
-            allowTouchMove={true}
-             centeredSlides={false} // ✅ prevents centering
-            className="mySwiper"
+    return (
+        <div className="productsSlider py-3">
+            <Swiper
+                // install Swiper modules
+                modules={[Navigation]}
+                navigation={true}
+                slidesPerView={props.items}
+                spaceBetween={10}
+                grabCursor={true}
+                allowTouchMove={true}
+                centeredSlides={false} // ✅ prevents centering
+                className="mySwiper"
             >
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-            <SwiperSlide>
-                <ProductItems/>
-            </SwiperSlide>
-        </Swiper>
-      
-    </div>
-  );
+                {
+                    props.data && props.data.length > 0 &&
+                        props.data.map((item, index) => (
+                        <SwiperSlide key={ index}>
+                            <ProductItems item={item} />
+                        </SwiperSlide>
+                        ))
+                }
+            </Swiper>
+
+        </div>
+    );
 };
 
 export default ProductsSlider;

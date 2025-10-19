@@ -26,3 +26,9 @@ border-radius: 0px !important;
     transform: rotate(90deg);
 }
 
+.zoomProductSliderThumbs.space .swiper-wrapper{padding-top: 38px !important;}
+.zoomProductSliderThumbs .swiper-button-next{
+    bottom: 0px !important;
+    height: 0px !important;
+    border-radius: 0px !important;
+}

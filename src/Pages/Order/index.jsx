@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AccountSideBar from '../../components/AccountSideBar'
 import { FaAngleDown } from "react-icons/fa6";
 import Button from '@mui/material/Button';
 import Badge from '../../components/Badge';
 import { FaAngleUp } from "react-icons/fa6";
+import { getData } from '../../../utils/api';
+import { MyContext } from '../../App';
 
 //this is for tehe order view like pending succes etc . on my account page order button
 
@@ -15,6 +17,17 @@ export default function Order() {
         }else
         setisOpenOrderProduct(idx);
     }
+    const context=useContext(MyContext);
+
+    //backend start here
+    const [order,setOrder]=useState([]);
+    useEffect(()=>{
+        getData("/api/order/get").then((res)=>{
+            if(res.error == false){
+                setOrder(res?.order);
+            }
+        })
+    },[]);
 
   return (
  <section className="py-10 w-full">
@@ -27,7 +40,7 @@ export default function Order() {
         <div className="py-5 px-3 border-b border-[rgba(0,0,0,0.1)]">
           <h2>My Orders</h2>
           <p className="mt-0 mb-0">
-            There are <span className="font-bold text-primary">2</span> orders
+            There are <span className="font-bold text-primary">{order?.length}</span> orders
           </p>
 
            <div className="relative overflow-x-auto shadow-md w-full py-5 px-8 rounded-md mt-5">
@@ -39,7 +52,6 @@ export default function Order() {
                         </th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Order Id</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Payment Id</th>
-                        <th scope="col" className="px-6 py-3 whitespace-nowrap">Products</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Name</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Phone Number</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Address</th>
@@ -52,90 +64,101 @@ export default function Order() {
                     </tr>
                     </thead>
                     <tbody>
-                        <tr className="border-b dark:border-gray-700   bg-white">
-                        
-                            <td className="px-6 py-4 font-[500]"><Button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-[#f1f1f1] " onClick={()=>{isShowOrderProduct(0)}}>
+                        {
+                            //order dynamic
+                            order?.length !== 0 && order?.map((item,index)=>(
+                                <>
+                                 <tr className="border-b dark:border-gray-700   bg-white">
+                            <td className="px-6 py-4 font-[500]"><Button className="!w-[35px] !h-[35px] !min-w-[35px] !rounded-full !bg-[#f1f1f1] " onClick={()=>{isShowOrderProduct(index)}}>
                                 {
-                                    isOpenOrderProduct===0? 
+                                    isOpenOrderProduct===index? 
                                     <FaAngleUp className="text-[16px] text-[rgba(0,0,0,0.7)]"  />
                                     :
                                     <FaAngleDown className="text-[16px] text-[rgba(0,0,0,0.7)]"  />
                                 }
                             </Button></td>
                             <td className="px-6 py-4 font-[500]">
-                                <span className='text-primary'>635585s588df445e5setd5255sa
-                                </span>
-                            </td>
-                            <td className="px-6 py-4 font-[500]">
-                                <span className='text-primary'>pay_PTMoqESsdl562
-                                </span>
-                            </td>
-                            <td className="px-6 py-4 font-[500]">Android 15</td>
-                            <td className="px-6 py-4 font-[500] whitespace-nowrap">Shivanand Gupta</td>
-                            <td className="px-6 py-4 font-[500]">6394176235</td>
-                            <td className="px-6 py-4 font-[500]">
-                                <span className="block w-[400px]">
-                                    Hi No 222 Street No 6 Adarsh MohallaMaujpur Delhi near shivam medical ph. +91-9643990046
+                                <span className="text-primary block w-[270px]">{item.orderId}
                                 </span>
                                 </td>
-                            <td className="px-6 py-4 font-[500]">272172</td>
-                            <td className="px-6 py-4  font-bold">76,852</td>
-                            <td className="px-6 py-4 font-[500]">shivanandgupta316@gmail.com</td>
                             <td className="px-6 py-4 font-[500]">
-                                <span className='text-primary'>635585s588df445e5setd5255sa
+                                <span className='text-primary'>{item.paymentId ? item.paymentId : 'CASH ON DELIVERY'}</span>
+                            </td>
+                            <td className="px-6 py-4 font-[500] whitespace-nowrap">{item?.userId.name}</td>
+                            <td className="px-6 py-4 font-[500]">{item?.delivery_address?.mobile}</td>
+                            <td className="px-6 py-4 font-[500]">
+                                <span className="block w-[400px]">
+                                   {[
+                                        item?.delivery_address?.address_line1,
+                                        item?.delivery_address?.city,
+                                        item?.delivery_address?.landmark,
+                                        item.delivery_address.state,
+                                        item.delivery_address.country,
+                                        item.delivery_address.mobile
+                                        ].filter(Boolean).join(", ")}
+                                </span>
+                                </td>
+                            <td className="px-6 py-4 font-[500]">{item?.delivery_address?.pincode}</td>
+                            <td className="px-6 py-4  font-bold">&#8377;{item?.totalAmt}</td>
+                            <td className="px-6 py-4 font-[500]">{item.userId.email}</td>
+                            <td className="px-6 py-4 font-[500]">
+                                <span className='text-primary'>{item.userId._id}
                                 </span>
                             </td>
-                            <td className="px-6 py-4 font-[500] "><Badge status="confirm"/></td>
-                            <td className="px-6 py-4 font-[500] whitespace-nowrap">2025-08-06</td>
+                            <td className="px-6 py-4 font-[500] "><Badge status={item.order_status}/></td>
+                            <td className="px-6 py-4 font-[500] whitespace-nowrap">{new Date(item.createdAt).toLocaleDateString('en-US', {
+                                            day: 'numeric',
+                                            month: 'short',
+                                            year: 'numeric'
+                                            })}
+                                            </td>
                         </tr> 
                         {
-                            isOpenOrderProduct ===0 &&
+                            isOpenOrderProduct ===index &&
                                 <tr>
                             <td  colSpan="6" className="px-6 ">
                             <div className="relative overflow-x-auto shadow-md w-full py-5 px-8 rounded-md ">
                 <table className="w-full text-sm text-left text-gray-700 bg-white">
                     <thead className="text-xs uppercase bg-gray-100 text-gray-700">
                     <tr>
-                        
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Product Id</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Product Title</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Image</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Quantity</th>
+                        <th scope="col" className="px-6 py-3 whitespace-nowrap">Price</th>
                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Sub Total</th>
-                        <th scope="col" className="px-6 py-3 whitespace-nowrap">Total Amount</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr className="border-b dark:border-gray-700   bg-white">
-                        
+                        {
+                            item?.products?.length !==0 && item.products.map((product,index)=>(
+                                <tr className="border-b dark:border-gray-700   bg-white">
                             <td className="px-6 py-4 font-[500]">
-                                <span className='text-gray-600'>635585s588df445e5setd5255sa
+                                <span className='text-gray-600'>
+                                        {product?._id}
                                 </span>
                             </td>
                             <td className="px-6 py-4 font-[500]">
-                                <span className='text-gray-600'>iPhone 16e 128 GB: Built for Apple Intelligence
-                                </span>
+                                <span className='text-gray-600'>
+                                     <div className='w-[200px]'>{product.productTitle}</div></span>
                             </td>
                             <td className="px-6 py-4 font-[500]">
-                                <img src='https://m.media-amazon.com/images/I/61FMZ9rSZUL._SX679_.jpg'
-                                className='w-[40px] h-[40px] object-cover rounded-md'/>
-                            </td>
-                            <td className="px-6 py-4 font-[500] whitespace-nowrap">5</td>
-                            <td className="px-6 py-4 font-bold">69,599</td>
-                            <td className="px-6 py-4 font-bold">
-                                79,999
-                                </td>
-                           
+                                <img src={product.image} className='w-[40px] h-[40px] object-cover rounded-md'/></td>
+                            <td className="px-6 py-4 font-[500] whitespace-nowrap">{product.quantity}</td>
+                            <td className="px-6 py-4 font-bold">&#8377;{product.price}</td>
+                            <td className="px-6 py-4 font-bold">&#8377;{product.quantity*product.price}</td>
                         </tr> 
-
-                        
+                            ))
+                        }
                     </tbody>
                 </table>
                 </div>
                 </td>
                         </tr>
                         }
-                        
+                                </>
+                            ))
+                        }
                     </tbody>
                 </table>
                 </div>
