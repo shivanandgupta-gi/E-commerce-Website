@@ -13,6 +13,7 @@ import Pagination from '@mui/material/Pagination';
 import { Link } from 'react-router-dom';
 import ProductLoadingGrid from '../../components/ProductSkelatonLoading/ProductLoadingGrid';
 import ProductItems from '../../components/ProductItems';
+import { postData } from '../../../utils/api';
 
 
 const ProductListing = () => {
@@ -24,14 +25,30 @@ const ProductListing = () => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorEl(null); 
+    };
+    const handleSelect = (value) => {
+        setSortBy(value); // update selected value
+        handleClose(); // close the menu
     };
     //backend start
     const [porductData,setProductData]=useState([]);//for product detail stroed
     const [isLoading,setIsLoading]=useState(false); //for loading button common in all
     const [page,setPage]=useState(1); //to define item in a page
     const [totalPages,setToatalPages]=useState(1);//how many page
+    const [selectedSortValue,setSelectedSortValue]=useState("Name","a-z");
 
+    const handleSortBy=(name,order,products,value)=>{
+        setSelectedSortValue(value);
+        postData(`/api/product/sortBy`,{
+            products:products.products,
+            sortBy:name,
+            order:order
+        }).then((res)=>{
+            setProductData(res);
+            setAnchorEl(null);
+        })
+    }
     return (
         <section className="py-6">
             <div className='px-6 py-2'>
@@ -59,9 +76,10 @@ const ProductListing = () => {
                         <SideBar porductData={porductData}
                          setProductData={setProductData} 
                          isLoading={isLoading} 
-                        setIsLoading={setIsLoading}
-                        page={page} setToatalPages={setToatalPages}/>
-
+                         setIsLoading={setIsLoading}
+                         page={page}
+                          setToatalPages={setToatalPages}
+                        />
                     </div>
                     {/* showing item here */}
                     <div className="rightContent w-[80%] py-3">
@@ -77,12 +95,12 @@ const ProductListing = () => {
                                     <IoGrid className="text-[rgba(0,0,0,0.7)]" />
                                 </Button>
                                 {/* {porductData.products.length} */}
-                                <span className='text-[14px] font-[500] pl-3 text-[rgba(0,0,0,0.7)]'>There are 27 products.</span>
+                                <span className='text-[14px] font-[500] pl-3 text-[rgba(0,0,0,0.7)]'>There are {porductData?.length !== 0 ? porductData?.products?.length : 0 } products.</span>
                             </div>
 
                             <div className="col2 ml-auto flex items-center justify-end gap-3 pr-4">
                                 <span className="text-[14px] font-[500] pl-3 text-[rgba(0,0,0,0.7)]">
-                                    Sort By
+                                    Sort By :
                                 </span>
                                 <div>
                                     <Button
@@ -93,7 +111,7 @@ const ProductListing = () => {
                                         onClick={handleClick}
                                         className='!bg-white !text-[12px] !text-[#000]  !capitalize !border-[#000] !border-2'
                                     >
-                                        Filter
+                                        {sortBy}
                                     </Button>
                                     <Menu
                                         id="basic-menu"
@@ -106,10 +124,18 @@ const ProductListing = () => {
                                             },
                                         }}
                                     >
-                                        <MenuItem onClick={handleClose} className='!text-[13px] !text-[#000]  !capitalize'>Sales, high to low</MenuItem>
-                                        <MenuItem onClick={handleClose} className='!text-[13px] !text-[#000]  !capitalize'>Relevance</MenuItem>
-                                        <MenuItem onClick={handleClose} className='!text-[13px] !text-[#000]  !capitalize'>Name, A to Z </MenuItem>
-                                        <MenuItem onClick={handleClose} className='!text-[13px] !text-[#000]  !capitalize'>Prize low to high </MenuItem>
+                                        <MenuItem onClick={() =>{ handleSelect('Name, A to Z'); 
+                                            handleSortBy('name','asc',porductData,'Name, A to Z')}
+                                        }  className='!text-[13px] !text-[#000]  !capitalize'>Name, A to Z </MenuItem>
+                                        <MenuItem onClick={() =>{ handleSelect('Name, Z to A'); 
+                                            handleSortBy('name','desc',porductData,'Name, Z to A')}
+                                        }  className='!text-[13px] !text-[#000]  !capitalize'>Name, Z to A </MenuItem>
+                                        <MenuItem onClick={() =>{ handleSelect('Price, low to high'); 
+                                            handleSortBy('price','asc',porductData,'Price, low to high')}
+                                        }  className='!text-[13px] !text-[#000]  !capitalize'>Price, low to high</MenuItem>
+                                        <MenuItem onClick={() =>{ handleSelect('Price, high to low'); 
+                                            handleSortBy('price','desc',porductData,'Price, high to low')}
+                                        }  className='!text-[13px] !text-[#000]  !capitalize'>Price, high to low </MenuItem>
                                     </Menu>
                                 </div>
                             </div>
@@ -117,7 +143,7 @@ const ProductListing = () => {
 
 
                         {/* for item showing */}
-                        <div className={`grid ${itemView === 'grid' ? 'grid-cols-4 md:grid-cols-4' :
+                        <div className={`grid ${itemView === 'grid' ? 'grid-cols-5 md:grid-cols-5' :
                             'grid-cols-1 md:grid-cols-1'
                             } gap-3`}>
                             {
@@ -126,7 +152,7 @@ const ProductListing = () => {
                                     {
                                         isLoading === true ? <ProductLoadingGrid view={itemView}/>
                                         :
-                                        porductData.products.map((item,index)=>(
+                                        porductData?.products?.length !== 0 && porductData?.products?.map((item,index)=>(
                                             <ProductItems key={index} item={item}/>
                                         ))
                                     }
@@ -136,19 +162,23 @@ const ProductListing = () => {
                                      {
                                         isLoading === true ? <ProductLoadingGrid view={itemView}/>
                                         :
-                                        porductData.products.map((item,index)=>(
-                                            <ProductItemsListView />
+                                        porductData?.products?.length !== 0 && porductData?.products?.map((item,index)=>(
+                                            <ProductItemsListView key={index} item={item} />
                                         ))
                                     }
                                     </>
                             }
-
                         </div>
-
-                        <div className='flex items-center justify-center mt-5'>
-                            <Pagination count={10} size="large" />
-                        </div>
-
+                            {
+                                totalPages >= 1 &&
+                                <div className='flex items-center justify-center mt-5'>
+                                <Pagination 
+                                showFirstButton showLastButton
+                                count={totalPages}
+                                page={page}
+                                onChange={(e,value)=>setPage(value)}  />
+                                </div>
+                            }
                     </div>
                 </div>
             </div>

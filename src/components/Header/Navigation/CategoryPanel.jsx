@@ -9,6 +9,7 @@ import { getDataWithouAuthintication } from "../../../../utils/api";
 
 
 const CategoryPanel = (props) => {
+  const [isOpenCatPanel, setIsOpenCatPanel] = useState(false);
   const toggleDrawer = (newOpen) => () => {
     props.setIsOpenCatPanel(newOpen);
   };
@@ -26,7 +27,9 @@ const CategoryPanel = (props) => {
         </h3> 
         {
           props.data.length !== 0 &&
-          <CategoryColapse data={props.data}/> //pass as props to shown on the sidebar
+          <CategoryColapse data={props.data}
+           setIsOpenCatPanel={setIsOpenCatPanel}
+          /> //pass as props to shown on the sidebar
         }
       </Box>
 );

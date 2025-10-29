@@ -52,7 +52,7 @@ const Navigation = () => {
                 catData.length > 0 && catData.map((cat,index)=>(
                     <li className=" list-none relative group " key={index}>
                         <Link
-                            to="/" className="link transition text-[14px] font-[500] hover:text-[#ff5252] !py-4 "
+                            to={`/product?catId=${cat._id}`} className="link transition text-[14px] font-[500] hover:text-[#ff5252] !py-4 "
                         >
                             {cat.name}
                         </Link>
@@ -67,7 +67,7 @@ const Navigation = () => {
                                     {
                                         cat.children.map((subCat,index)=>(
                                             <li className="list-none w-full relative" key={index}>
-                                                <Link to="/" className='w-full'>
+                                                <Link  to={`/product?subCatId=${subCat._id}`} className='w-full'>
                                                 <Button className="!text-[rgba(0,0,0,0.8)] w-full !justify-start !text-left !rounded-none">{subCat.name}</Button>
                                                 {/* when click on fashion then men open and then click on men then many category open */}
                                                 </Link>
@@ -79,7 +79,7 @@ const Navigation = () => {
                                                             {
                                                                 subCat.children.map((thirdSubData,index)=>(
                                                                     <li className="list-none w-full" key={index}>
-                                                                        <Link to="/" className='w-full'>
+                                                                        <Link to={`/product?ThirdSubCatId=${thirdSubData._id}`}  className='w-full'>
                                                                         <Button className="!text-[rgba(0,0,0,0.8)] w-full !justify-start !text-left !rounded-none">{thirdSubData.name}</Button>
                                                                         </Link>
                                                                     </li>

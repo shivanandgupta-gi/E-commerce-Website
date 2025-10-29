@@ -18,7 +18,9 @@ const CategoryColapse=(props) =>{
   const openInnerSubmenu = (i) => {
     setInnerSubmenuIndex(innerSubmenuIndex === i ? null : i);
   };
-
+  const handleCategoryClick = () => {
+    setIsOpenCatPanel(false); // ✅ Closes Drawer on any link click
+  };
   
   return (
     <>
@@ -28,10 +30,10 @@ const CategoryColapse=(props) =>{
             {
               props.data.length > 0 && props.data.map((cat,index)=>(
                  <li className="list-none flex items-center relative flex-col" key={index}>
-                  <Link to="/" className="links w-full">
+                  <Link to={`/product?catId=${cat._id}`} className="links w-full"  onClick={handleCategoryClick}>
                   <Button className="w-full !text-left !justify-start !px-3 !text-[rgba(0,0,0,1)] ">{cat.name}</Button>
                   </Link>
-                  {
+                  { 
                     submenuIndex === index ?
                       <CiSquareMinus className="absolute top-[10px] right-[15px] cursor-pointer text-[600] " onClick={()=>{openSubmenu(index)}} />
                       :
@@ -44,7 +46,7 @@ const CategoryColapse=(props) =>{
                     {
                         cat.children.length >0 &&  cat.children.map((subCat,index)=>(
                           <li className="relative list-none mb-1" key={index}>
-                            <Link to="/" className="links w-full">
+                            <Link to={`/product?subCatId=${subCat._id}`} className="links w-full" onClick={handleCategoryClick}>
                           <Button className="w-full !text-left !justify-start !px-3 !text-[rgba(0,0,0,0.8)]">{subCat.name}</Button>
                           </Link>
                           {
@@ -60,7 +62,8 @@ const CategoryColapse=(props) =>{
                                   {
                                     subCat.children.length > 0 &&  subCat.children.map((thirdSubData,index)=>(
                                       <li className="relative list-none mb-0.5 " key={index}>
-                                        <Link to={"/"} className=" hover:!text-[#ff5252] w-full !text-left !justify-start !px-3 !text-[rgba(0,0,0,0.8)]">{thirdSubData.name}</Link>
+                                        <Link to={`/product?ThirdSubCatId=${thirdSubData._id}`}   className=" hover:!text-[#ff5252] w-full !text-left !justify-start !px-3 !text-[rgba(0,0,0,0.8)]" onClick={handleCategoryClick}>
+                                        {thirdSubData.name}</Link>
                                       </li>
                                     ))
                                   }

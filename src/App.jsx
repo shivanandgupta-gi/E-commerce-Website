@@ -28,6 +28,7 @@ import Address from './Pages/address/index.jsx';
 import SuccessOrder from './Pages/Order/success.jsx';
 import SearchHome from './Pages/SearchHome/index.jsx';
 import BlogDetails from './components/BlogItem/BlogDetails.jsx';
+import AboutUs from './components/AboutUs/index.jsx';
 
 
 const MyContext = createContext();
@@ -205,7 +206,7 @@ function App() {
           <Header />
           <Routes>
             <Route path={"/"} element={<Home />} />
-            <Route path={"/productListing"}  element={<ProductListing />} />
+            <Route path={"/product"}  element={<ProductListing />} />
             <Route path={"/product/:id"}  element={<ProductDetails />} />
             <Route path={"/login"} element={<Login />} />
             <Route path={"/register"} exact={true} element={<Register />} />
@@ -225,6 +226,7 @@ function App() {
             <Route path={"/pay/success"} exact={true} element={<SuccessOrder/>} />
             <Route path={"/search"} exact={true} element={<SearchHome/>} />
             <Route path={"/blog/:id"} exact={true} element={<BlogDetails/>} />
+            <Route path={"/aboutus"} exact={true} element={<AboutUs/>} />
           </Routes>
           <Footer />
         </MyContext.Provider>

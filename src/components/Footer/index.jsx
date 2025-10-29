@@ -71,15 +71,22 @@ const Footer = () => {
                                 507-Union Trade Centre<br />
                                 France
                             </p>
-                            <Link className="link text-[13px]" to="mailto:someone@example.com">
-                                sales@yourcompany.com
+                            <Link className="link text-[15px]" to="mailto:shivanandgupta316@gmail.com">
+                                shivanandgupta316@gmail.com
                             </Link>
                             <span className="text-[22px] font-[600] block w-full mt-3 mb-5 text-primary">
-                                (+91) 9876-543-210
+                                (+91) 63941-76235
                             </span>
-                            <div className='flex items-center gap-2'>
-                                <HiOutlineChatBubbleLeftRight className='text-[40px] text-primary' />
-                                <span className='text-[16px] font-[600]'>
+                            <div className='flex items-center gap-2 cursor-pointer hover:scale-105  transition-transform duration-200 group'
+                             onClick={() => {
+                                const phoneNumber = "916394176235"; // ← your WhatsApp number (with country code, no + or spaces)
+                                const message = "Hello! I need some expert help.";
+                                const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                                window.open(url, "_blank");
+                            }}
+                            >
+                               <HiOutlineChatBubbleLeftRight className="text-[40px] text-primary " />
+                                 <span className="text-[16px] font-[600] group-hover:text-green-500 transition-colors duration-200">
                                     Online Chat <br />
                                     Get Expert Help
                                 </span>
@@ -97,7 +104,9 @@ const Footer = () => {
                                         <Link className="link hover:text-[#ff5252]" to="/">Prices drop</Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">New products</Link>
+                                        <a href='#latest-products'
+                                        className="link hover:text-[#ff5252] ">New products
+                                            </a>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
                                         <Link className="link hover:text-[#ff5252]" to="/">Best Sales</Link>
@@ -118,24 +127,23 @@ const Footer = () => {
                                 <h2 className="text-[18px] font-[600] mb-4">Our company</h2>
                                 <ul className="list">
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">Delivery</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/">Contact Us</Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">Legal Notice</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/">Our Stories</Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">Terms and conditions of use</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/">Terms and conditions</Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">About us</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/aboutus">About us</Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">Secure payment</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/">Press</Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">Login</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/">Corporate Information</Link>
                                     </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -214,7 +222,7 @@ const Footer = () => {
 
                     </ul>
 
-                    <p className='text-[13px] text-center'>© 2024 - Ecommerce Template</p>
+                    <p className='text-[13px] text-center'>© 2025 - Ecommerce Template</p>
                 </div>
             </div>
 

@@ -185,7 +185,7 @@ let Header = () => {
                                                     }}
                                                     className='flex gap-2 !py-2'
                                                 >
-                                                    <IoIosLogOut className='text-[18px]' />
+                                                    <IoIosLogOut className='text-[18px]' /> 
                                                     <span className='font-[14px'>LogOut</span>
                                                 </MenuItem>
                                             </Menu>

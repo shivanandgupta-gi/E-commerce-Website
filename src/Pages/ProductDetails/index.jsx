@@ -9,6 +9,7 @@ import Reviews from '../../components/Reviews';
 import { useContext } from 'react';
 import { MyContext } from '../../App';
 import { useRef } from 'react';
+import ProductsSlider from '../../components/ProductSlider';
 
 const ProductDetails = () => {
     //backend start
@@ -17,21 +18,29 @@ const ProductDetails = () => {
     const [isLoading, setIsLoading] = useState(false); // State to manage loading status
     const [reviewsCount, setReviewsCount] = React.useState(0); //to get all reviews f
     const { id } = useParams(); // gets ":id" from route //useParams is a React Router hook that lets you read URL parameters.
+    const [releatedProductData,setReleatedProductData]=useState([])
     useEffect(() => {
         // Fetch product details using the id
         setIsLoading(true); // Set loading to true before starting the fetch
         getData(`/api/product/getSingleProduct/${id}`).then((res) => {
             if (res.error === false) {
+                setProductData(res?.product);
+                getData(`/api/product/getAllProductBySubCategoryId/${res?.product?.subCatId}`).then((res)=>{
+                    if(res?.error === false){
+                        const filterData=res?.products?.filter((item)=> item._id !== id);
+                        setReleatedProductData(filterData);
+                    }
+                })
                 setTimeout(() => {
-                    setProductData(res.product);
                     setIsLoading(false); // Set loading to false after data is fetched
                 }, 400);
             }
         });
+
         window.scrollTo(0, 0); // Scroll to top when component mounts
     }, [id]);
     const [ActiveTab, setActiveTab] = useState(0);
-
+    
     useEffect(() => {
         getData(`/api/user/get-all-review?productId=${id}`).then((res) => {
             if (res.error === false) {
@@ -64,7 +73,7 @@ const ProductDetails = () => {
                                 href="/"
                                 className='hover:text-[#ff5252] !text-[14px]'
                             >
-                                Fashion
+                               electronics
                             </Link>
                             <Link
                                 underline="hover"
@@ -195,6 +204,15 @@ const ProductDetails = () => {
                     }
                 </div>
             </section>
+            {
+                releatedProductData?.length !== 0 && 
+                <div className="px-7 pt-7">
+                <h2 className="text-[20px] font-[600]">Releated Product</h2>
+                    {
+                        <ProductsSlider items={6} data={releatedProductData} />
+                    }
+                </div>
+            }
         </>
     )
 }

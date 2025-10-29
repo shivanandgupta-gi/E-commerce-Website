@@ -49,6 +49,8 @@ const MyAccount = () => {
             })
 
             setFormFields({ //this for what is in database shown in textfiled area of change password
+                 name: context?.userData?.name,
+                 mobile: context?.userData?.mobile,
                 email: context?.userData?.email,
                 oldPassword: context?.userData?.password,
                 newPassword: '',
@@ -63,7 +65,7 @@ const MyAccount = () => {
     }
 
     //if any field empty disabeld button it check the field
-    const validValue = Object.values(formFields).every(el => el);
+    //const validValue = Object.values(formFields).every(el => el);
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -85,13 +87,13 @@ const MyAccount = () => {
         }
         //api called
         editData(`/api/user/${userId}`, formFields, { withCredentials: true }).then((res) => {
-            console.log(res);
             if (res?.error !== true) {
-                context.openAlertBox("success", res?.data?.message)
+                context.openAlertBox("success", res?.message)
                 setIsLoading(false);
+
             }
             else {
-                context.openAlertBox("error", res?.data?.message)
+                context.openAlertBox("error", res?.message)
                 setIsLoading(false);
             }
         })
@@ -128,7 +130,7 @@ const MyAccount = () => {
             if (res?.error !== true) {
                 setIsLoading2(false)
                 context.openAlertBox("success", res?.message)
-
+                setIsFormShown(false);
             }
             else {
                 setIsLoading2(false);
@@ -196,7 +198,7 @@ const MyAccount = () => {
                             <div className='flex items-center gap-4'>
                                 <Button
                                     type="submit"
-                                    disabled={!validValue}
+                                    //disabled={!validValue}
                                     className='btn-org btn-md w-[200px]'>
                                     {
                                         isLoading === true ? ( //for loading (loder)

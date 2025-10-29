@@ -8,7 +8,6 @@ import QuantatyBox from '../QuantityBox';
 
 
 const ProductDetailsOnScreen=(props)=> {
-    console.log(props)
     const [productActionIndex, setProductActionIndex]= useState(null);
   return (
     <>

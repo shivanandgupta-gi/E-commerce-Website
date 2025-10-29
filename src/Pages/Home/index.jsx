@@ -33,6 +33,7 @@ const Home = () => {
   const [allProductData, setAllProductData] = useState([])
   const [allFeaturedProduct, setAllFeaturedProductData] = useState([])
   const [bannerV1Data, setBannerV1Data] = useState([])
+  const [adsBannerData, setAdsBannerData]=useState([]);
   const [blogData, setBlogData] = useState([]);
   //this for home slider make dynamic
   useEffect(() => {
@@ -51,6 +52,11 @@ const Home = () => {
     getData("/api/banner/getbanner").then((res) => { //this for the bannerV1 means mini ads side of 50% banner clickable ads
       if (res.error === false) {
         setBannerV1Data(res.banner);
+      }
+    })
+     getData("/api/ads/getbanner").then((res) => { //this for the adsBanner means mini ads between product
+      if (res.error === false) {
+        setAdsBannerData(res.banner);
       }
     })
     getData("/api/blog/getBlog").then((res) => { //this for the blog data get
@@ -113,7 +119,7 @@ const Home = () => {
                   //make the name dynamic by category data in app.jsx due to shown category
                   //like item fashion click then shown all fashion releated product
                   context.catData.map((item, index) => (
-                    <Tab label={item.name} onClick={() => filterByCategory(item._id)} />
+                    <Tab key={index} label={item.name} onClick={() => filterByCategory(item._id)} />
                   ))
                 }
               </Tabs>
@@ -163,7 +169,7 @@ const Home = () => {
             </div>
             <div className='col2'>
               <p class="mb-0 font-[500]">
-                Free Delivery Now On Your First Order and over 1000
+                Free Delivery Now On Your First Order and over Rs.1000
               </p>
             </div>
             <p class="font-bold text-[25px]">
@@ -176,11 +182,11 @@ const Home = () => {
           }
         </div>
 
-      </section>
+      </section> 
 
 
       {/* for latest product banner  */}
-      <section className="py-5 pt-0 bg-white">
+      <section id="latest-products" className="py-5 pt-0 bg-white">
         <div className="px-7">
           <h2 className="text-[20px] font-[600]">Latest Products</h2>
           {
@@ -190,7 +196,9 @@ const Home = () => {
             allProductData.length !== 0 &&
             <ProductsSlider items={6} data={allProductData} />
           }
-          <AdsBannerSlider items={3} />
+            {adsBannerData.length > 0 && (
+        <AdsBannerSlider items={3} data={adsBannerData} />
+      )}
         </div>
       </section>
 
@@ -204,7 +212,9 @@ const Home = () => {
             allFeaturedProduct.length !== 0 && //all product are shown here
             <ProductsSlider items={6} data={allFeaturedProduct} />
           }
-          <AdsBannerSlider items={3} />
+          {adsBannerData.length > 0 && (
+         <AdsBannerSlider items={3} data={[...adsBannerData].reverse()} />
+      )}
         </div>
       </section>
 

@@ -92,10 +92,11 @@ export default function Order() {
                                         item?.delivery_address?.address_line1,
                                         item?.delivery_address?.city,
                                         item?.delivery_address?.landmark,
-                                        item.delivery_address.state,
-                                        item.delivery_address.country,
-                                        item.delivery_address.mobile
-                                        ].filter(Boolean).join(", ")}
+                                        item?.delivery_address?.state,
+                                        item?.delivery_address?.country,
+                                        item?.delivery_address?.mobile
+                                        ].filter(Boolean).join(", ")
+                                    }
                                 </span>
                                 </td>
                             <td className="px-6 py-4 font-[500]">{item?.delivery_address?.pincode}</td>

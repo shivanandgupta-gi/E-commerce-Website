@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { postData } from '../../../utils/api';
 
-
+ 
 const ChangePass=()=> {
     
     const [isPasswordShow,setIsPasswordShow]=useState(false);
@@ -50,10 +50,8 @@ const ChangePass=()=> {
 
           //api called
           postData("/api/user/reset-password",formFields).then((res)=>{
-            console.log(res);
-
             if(res?.error !== true){
-                 localStorage.removeItem("userEmail");
+                localStorage.removeItem("userEmail");
                 localStorage.removeItem("actionType")
               context.openAlertBox("success",res?.message)
                setIsLoading(false);

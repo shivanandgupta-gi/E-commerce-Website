@@ -162,8 +162,8 @@ const ProductItems = ({ item }) => { //destruct the props
 
         {/* for price */}
         <div className='flex items-center gap-4'>
-          <span className='oldPrice line-through text-gray-500 text-[16px] font-[500]'>&#8377;{item.oldPrice}</span>
-          <span className='oldPrice text-primary font-[600] text-[16px]'>&#8377;{item.price}</span>
+          <span className='oldPrice line-through text-gray-500 text-[16px] font-[500]'>&#8377;{item?.oldPrice?.toLocaleString('en-IN')}</span>
+          <span className='oldPrice text-primary font-[600] text-[16px]'>&#8377;{item?.price?.toLocaleString('en-IN')}</span>
         </div>
 
         {/* for add to cart button */}

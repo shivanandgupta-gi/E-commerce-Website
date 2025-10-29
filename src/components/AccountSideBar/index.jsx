@@ -6,11 +6,11 @@ import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
 import { IoBagCheckOutline } from "react-icons/io5";
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 import { MyContext } from '../../App';
 import { useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';//for loading
-import {  uploadImage } from '../../../utils/api';
+import {  getData, uploadImage } from '../../../utils/api';
 import { useEffect } from 'react';
 import { MdOutlineLocationOn } from "react-icons/md";
 
@@ -63,6 +63,27 @@ const AccountSideBar=()=> {
             console.log(error)
         }
     }
+    //for logout
+    const [anchorEl, setAnchorEl] = useState(null);
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const history=useNavigate();
+     const logout = () => {
+            setAnchorEl(null); //menu null means not shown
+            getData(`/api/user/logout?token=${localStorage.getItem('accesstoken')}`, { withCredentials: true }).then((res) => {
+                if (res?.success === true) {
+                    context.setIsLogin(false);
+                    localStorage.removeItem('accesstoken');
+                    localStorage.removeItem('refreshtoken');
+                    localStorage.removeItem('userdata');
+                    context.setUserData(null);
+                    context.setMyListData([]); //clear my list data on logout
+                    context.setCartData([]); //clear cart data on logout
+                    history("/");
+                }
+            })
+        }
   return (
      <div className="card bg-white shadow-md rounded-md sticky top-[10px]">
                     <div className="w-full p-5  flex items-center justify-center flex-col">
@@ -84,9 +105,7 @@ const AccountSideBar=()=> {
                                 />
                             ))
                         ) : (
-                            <img
-                                
-                                src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg" // <-- path to your default image
+                            <img src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg" // <-- path to your default image
                                 className="w-full h-full object-cover"
                                 alt="Default Profile"
                             />
@@ -149,13 +168,15 @@ const AccountSideBar=()=> {
                             </NavLink>
                         </li>
                         <li className="w-full">
-                            <NavLink  to="/logout"
-                                    exact={true} activeClassName="isActive" >
-                            <Button className="w-full  !py-2 !text-left !px-5 !justify-start !capitalize !text-[rgba(0,0,0,0.8)] !rounded-none flex items-center gap-2">
+                            <Button className="w-full  !py-2 !text-left !px-5 !justify-start !capitalize !text-[rgba(0,0,0,0.8)] !rounded-none flex items-center gap-2"
+                                type='submit'
+                                onClick={() => {
+                                    handleClose();
+                                    logout();
+                                }}>
                                 <IoIosLogOut className="text-[18px]" />
                                 LogOut
                             </Button>
-                            </NavLink>
                         </li>
                     </ul>
                 </div>
