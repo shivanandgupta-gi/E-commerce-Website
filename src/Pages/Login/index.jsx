@@ -52,8 +52,7 @@ export default function Login() {
       }
       //api called
       postData("/api/user/login",formFields,{withCredentials:true}).then((res)=>{
-        console.log(res);
-        if(res?.error !== true){
+        if(res?.error === false){
           context.openAlertBox("success","Login Successfully.")
            localStorage.setItem("userEmail",formFields.email);//for user email store in local storage
            setIsLoading(false);
@@ -65,7 +64,8 @@ export default function Login() {
             localStorage.setItem("refreshtoken", res.data?.refreshToKen)
 
             //this for shown on main page that user login menas user profile shown
-            context.setIsLogin(true);
+            context?.setIsLogin(true);
+            context?.getUserDetails();
             history("/"); //verify router in index.js//otp page open automatic when otp send
         }
         else{

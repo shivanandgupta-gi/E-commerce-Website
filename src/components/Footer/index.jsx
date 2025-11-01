@@ -127,7 +127,8 @@ const Footer = () => {
                                 <h2 className="text-[18px] font-[600] mb-4">Our company</h2>
                                 <ul className="list">
                                     <li className="list-none text-[14px] w-full mb-2">
-                                        <Link className="link hover:text-[#ff5252]" to="/">Contact Us</Link>
+                                        <Link className="link hover:text-[#ff5252]" to="/">Contact Us
+                                        </Link>
                                     </li>
                                     <li className="list-none text-[14px] w-full mb-2">
                                         <Link className="link hover:text-[#ff5252]" to="/">Our Stories</Link>

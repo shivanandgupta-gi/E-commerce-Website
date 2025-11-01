@@ -29,6 +29,7 @@ import SuccessOrder from './Pages/Order/success.jsx';
 import SearchHome from './Pages/SearchHome/index.jsx';
 import BlogDetails from './components/BlogItem/BlogDetails.jsx';
 import AboutUs from './components/AboutUs/index.jsx';
+import Chatbot from './Pages/ChatBot/index.jsx';
 
 
 const MyContext = createContext();
@@ -44,7 +45,7 @@ function App() {
   const [fullWidth, setFullWidth] = React.useState(true);
   const [openCartPanel, setOpenCartPanel] = useState(false);
   const [openAddressPanel, setOpenAddressPanel] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(null);
   const [userData, setUserData] = useState(null);//for user name and password shown on profile
   const [catData,setCatData]=useState([]); //it store all the data come from backend of category
   const [cartData,setCartData]=useState([]); //it store all the data come from backend of cart
@@ -75,7 +76,7 @@ function App() {
  
   useEffect(() => {
     const token = localStorage.getItem('accesstoken');
-    if (token !== undefined && token !== null && token !== '') {
+    if (token) {
       setIsLogin(true);
       getUserDetails();
       getCartData();
@@ -84,7 +85,7 @@ function App() {
     else {
       setIsLogin(false);
     }
-  }, [isLogin])
+  }, [])
 
   useEffect(() => {
   fetchAddressData();
@@ -228,6 +229,7 @@ function App() {
             <Route path={"/blog/:id"} exact={true} element={<BlogDetails/>} />
             <Route path={"/aboutus"} exact={true} element={<AboutUs/>} />
           </Routes>
+           <Chatbot/>
           <Footer />
         </MyContext.Provider>
       </BrowserRouter>

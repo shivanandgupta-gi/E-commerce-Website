@@ -95,7 +95,7 @@ let Header = () => {
                         <ul className='flex items-center justify-end gap-3  w-full'>
                             {/* this is for login if not open login icon and if not show user account */}
                             {
-                                context.isLogin === false ?
+                                !context.isLogin ?
                                     <li className='list-none'>
 
                                         <Link to="/login" className='link text-[15px] font-[550] text-black-800 hover:text-[#ff5252]'>Login</Link> | &nbsp;
@@ -119,7 +119,7 @@ let Header = () => {
                                                     <h4 className="leading-3 text-[14px] text-[rgba(0,0,0,0.6)] font-[500] mb-0 capitalize text-left justify-start">
                                                         {context?.userData?.name}
                                                     </h4>
-                                                    <span className="text-[13px] text-[rgba(0,0,0,0.6)] font-[400] capitalize text-left justify-start">
+                                                    <span className="text-[13px] text-[rgba(0,0,0,0.6)] font-[400] lowercase text-left justify-start">
                                                         {context?.userData?.email}
                                                     </span>
                                                 </div>

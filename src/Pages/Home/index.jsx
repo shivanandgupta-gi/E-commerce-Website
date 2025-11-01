@@ -77,14 +77,16 @@ const Home = () => {
     });
   }
 
-  useEffect(() => {//same as filterbycategory work  in popular product work
-    getData(`/api/product/getAllProductByCategory/${context.catData[0]}`).then((res) => { //this for the product get
-      setPopularProductData([])
-      if (res.error === false) {
-        setPopularProductData(res.products);
-      }
-    });
-  }, [context.catData])//dependency is context.getdata
+  useEffect(() => {
+    if (context?.catData && context.catData.length > 0) {
+      const defaultCategoryId = context.catData[0]._id; // 👈 use _id or actual id field
+      getData(`/api/product/getAllProductByCategory/${defaultCategoryId}`).then((res) => {
+        if (res.error === false) {
+          setPopularProductData(res.products);
+        }
+      });
+    }
+  }, [context?.catData]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -118,7 +120,7 @@ const Home = () => {
                 {
                   //make the name dynamic by category data in app.jsx due to shown category
                   //like item fashion click then shown all fashion releated product
-                  context.catData.map((item, index) => (
+                  context?.catData?.map((item, index) => (
                     <Tab key={index} label={item.name} onClick={() => filterByCategory(item._id)} />
                   ))
                 }
@@ -132,7 +134,7 @@ const Home = () => {
           }
           {/* this is for the product slider in slide component */}
           {
-            popularProductData.length !== 0 &&
+            popularProductData?.length !== 0 &&
             <ProductsSlider items={6} data={popularProductData} />
           }
         </div>
