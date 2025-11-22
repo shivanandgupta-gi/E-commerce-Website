@@ -229,7 +229,7 @@ function App() {
             <Route path={"/blog/:id"} exact={true} element={<BlogDetails/>} />
             <Route path={"/aboutus"} exact={true} element={<AboutUs/>} />
           </Routes>
-           <Chatbot/>
+           {/* <Chatbot/> */}
           <Footer />
         </MyContext.Provider>
       </BrowserRouter>

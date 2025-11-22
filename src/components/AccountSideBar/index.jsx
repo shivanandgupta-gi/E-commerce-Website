@@ -77,6 +77,9 @@ const AccountSideBar=()=> {
                     localStorage.removeItem('accesstoken');
                     localStorage.removeItem('refreshtoken');
                     localStorage.removeItem('userdata');
+                    localStorage.removeItem("userEmail");
+                    localStorage.removeItem("savedCities");
+                    localStorage.clear();
                     context.setUserData(null);
                     context.setMyListData([]); //clear my list data on logout
                     context.setCartData([]); //clear cart data on logout
